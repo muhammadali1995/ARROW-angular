@@ -1,0 +1,19 @@
+<div class="charts-container">
+  <h1 class="title">Vaccination stats</h1>
+  <div class="states-dropdown-wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>Select a state</mat-label>
+      <mat-select (selectionChange)="onStateChange()" [(ngModel)]="selectedState">
+        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="charts-wrapper">
+    <div class="bar-chart-wrapper chart-wrapper" *ngIf="weeklyVaccineAllocationByStates">
+      <app-weekly-allocation-by-state-chart [data]="weeklyVaccineAllocationByStates"></app-weekly-allocation-by-state-chart>
+    </div>
+    <div class="pie-chart-wrapper chart-wrapper">
+
+    </div>
+  </div>
+</div>

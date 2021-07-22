@@ -1,0 +1,19 @@
+.charts-container {
+  .title {
+    padding: 2px 20px;
+  }
+
+  .states-dropdown-wrapper {
+    display: flex;
+    padding: 5px;
+    justify-content: flex-end;
+  }
+
+  .charts-wrapper {
+    display: flex;
+
+    .charts-wrapper {
+      flex: 1;
+    }
+  }
+}

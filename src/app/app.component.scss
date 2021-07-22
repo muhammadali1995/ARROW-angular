@@ -1,0 +1,15 @@
+@import './../assets/styles/variables';
+
+.side-nav {
+  padding: 10px 20px;
+  .active {
+    color: red;
+  }
+}
+.main-content-wrapper {
+  min-height: 100vh;
+
+  .main-content {
+    display: flex;
+  }
+}
