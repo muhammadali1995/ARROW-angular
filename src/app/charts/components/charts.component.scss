@@ -7,13 +7,17 @@
     display: flex;
     padding: 5px;
     justify-content: flex-end;
+    gap: 50px;
   }
 
   .charts-wrapper {
     display: flex;
 
-    .charts-wrapper {
-      flex: 1;
+    .chart-wrapper {
+      flex: auto;
+    }
+    .bar-chart-wrapper {
+      flex: 2;
     }
   }
 }
