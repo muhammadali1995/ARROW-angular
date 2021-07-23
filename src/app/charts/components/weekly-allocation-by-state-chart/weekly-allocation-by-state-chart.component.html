@@ -1,1 +1,10 @@
-<canvas id="vertical-chart" width="400" height="400" #barChart></canvas>
+<div>
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="dataSets"
+            [labels]="barChartLabels"
+            [options]="chartOptions"
+            [chartType]="barChartType">
+    </canvas>
+  </div>
+</div>

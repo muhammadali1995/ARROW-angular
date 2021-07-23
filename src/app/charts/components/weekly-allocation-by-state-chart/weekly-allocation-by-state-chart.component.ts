@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import Chart from 'chart.js/auto'
+import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
+import {Label} from "ng2-charts";
+
 
 
 @Component({
@@ -9,15 +11,28 @@ import Chart from 'chart.js/auto'
 })
 export class WeeklyAllocationByStateChartComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('barChart') private barCanvas!: ElementRef;
-  barChart: any;
-  @Input() data: any;
+
+  @Input() dataSets: ChartDataSets;
+
+  public chartOptions: ChartOptions = {
+    responsive: true,
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  }
+
+  public barChartLabels: Label[];
+  public barChartType: ChartType = 'bar';
 
   constructor() {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
+    console.log(this.dataSets);
   }
 
   ngAfterViewInit(): void {
@@ -25,19 +40,6 @@ export class WeeklyAllocationByStateChartComponent implements OnInit, AfterViewI
   }
 
   draw(): void {
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
-      type: 'bar',
-      data: this.data,
-      options: {
-        responsive: true,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Weekly vaccine allocation by states'
-          }
-        }
-      }
-    })
   }
 
 }

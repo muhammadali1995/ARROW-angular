@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {STATES} from "../../models/states";
 import {ChartsDataService} from "../../services/charts-data.service";
-import {StateStats} from "../../models/state-stats";
+import {ChartsData} from "../../models/charts-data";
 
 @Component({
   selector: 'app-charts',
@@ -11,15 +10,17 @@ import {StateStats} from "../../models/state-stats";
 export class ChartsComponent implements OnInit {
 
   selectedState: string = '';
-  states: string [] = STATES;
-  weeklyVaccineAllocationByStates: StateStats[];
+  weeklyVaccineAllocationByStates: ChartsData;
+  states: string[];
 
   constructor(private chartsDataService: ChartsDataService) {
   }
 
   ngOnInit(): void {
-    this.chartsDataService.fetchAllStateWeeklyDoseAllocation('2021-06-21T00:00:00.000').subscribe((stats: StateStats[]) => {
-      this.weeklyVaccineAllocationByStates = stats;
+    this.chartsDataService.fetchAllStateWeeklyDoseAllocation('2021-06-21T00:00:00.000');
+
+    this.chartsDataService.weeklyVaccineAllocationByStatesData$.subscribe((data: ChartsData) => {
+      this.weeklyVaccineAllocationByStates = data;
     })
   }
 
