@@ -1,8 +1,10 @@
+import { Subject } from 'rxjs';
 import { TableDataService } from './../../../services/table-data.service';
 import { Earthquake } from './../../../models/table-data';
-import { Component, Input, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from "@angular/material/paginator";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: 'app-earthquake-table',
@@ -10,6 +12,9 @@ import { MatPaginator } from "@angular/material/paginator";
   styleUrls: ['./earthquake-table.component.scss']
 })
 export class EarthquakeTableComponent implements OnInit {
+
+  private unsubscibes$ = new Subject<void>();
+
   dataSource: MatTableDataSource<Earthquake> = new MatTableDataSource<Earthquake>();
   displayedColumns: string[] = [
     'source',
@@ -25,13 +30,21 @@ export class EarthquakeTableComponent implements OnInit {
   constructor(private tableDataService: TableDataService) { }
 
   ngOnInit(): void {
-    this.tableDataService.earthquakes$.subscribe((eq: Earthquake[]) => {
-      this.dataSource.data = eq;
-    });
+    this.tableDataService.earthquakes$
+      .pipe(takeUntil(this.unsubscibes$))
+      .subscribe((eq: Earthquake[]) => {
+        this.dataSource.data = eq;
+      });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  //unsubscibe fro subscriptions
+  ngOnDestroy(): void {
+    this.unsubscibes$.next();
+    this.unsubscibes$.complete();
   }
 }
 
