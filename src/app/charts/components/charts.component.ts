@@ -1,8 +1,7 @@
 import { takeUntil } from 'rxjs/operators';
-import { WEEKS_OF_ALLOCATION, PieChartData, STATES } from './../../models/charts-data';
+import { WEEKS_OF_ALLOCATION, STATES } from './../../models/charts-data';
 import { Label } from 'ng2-charts';
 import { Component, OnInit } from '@angular/core';
-import { BarChartData } from "src/app/models/charts-data";
 import { ChartsDataService } from "../../services/charts-data.service";
 import { Subject } from "rxjs";
 

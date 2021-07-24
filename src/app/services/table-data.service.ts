@@ -4,13 +4,11 @@ import { Earthquake } from './../models/table-data';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 const apiUrl = environment.api.tables;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TableDataService {
 
   earthquakes$: BehaviorSubject<Earthquake[]> = new BehaviorSubject<Earthquake[]>([]);

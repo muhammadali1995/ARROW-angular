@@ -4,16 +4,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { UtilityService } from "./utility.service";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { BarChartData, StateStats } from "../models/charts-data";
 import { tap } from "rxjs/operators";
 import { ChartDataSets } from "chart.js";
 
 const apiUrl = environment.api.charts;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ChartsDataService {
 
   weeklyVaccineAllocationData$: Subject<BarChartData> = new Subject<BarChartData>();
@@ -36,6 +34,7 @@ export class ChartsDataService {
       .pipe(tap((data) => { this.setWeeklyVaccineAllocationByStateData(data) }));
   }
 
+  //map data for pie chart
   setWeeklyVaccineAllocationByStateData(stateStats: StateStats[]) {
     const data = stateStats[0];
     const labels: Label[] = ['Dose 1', 'Dose 2'];
@@ -43,8 +42,10 @@ export class ChartsDataService {
     this.weeklyVaccineAllocationByStateData$.next({ labels: labels, datasets: dataSets });
   }
 
+  //map data for charts
   setWeeklyVaccineAllocationData(stateStats: StateStats[]): void {
     if (stateStats.length === 0) return;
+
     const labels: Label[] = [];
     const dataSets: ChartDataSets[] = [{
       data: [],
@@ -53,11 +54,13 @@ export class ChartsDataService {
       data: [],
       label: '2nd dose allocations'
     }];
+
     stateStats.forEach((stats: StateStats) => {
       labels.push(stats.jurisdiction);
       dataSets[0].data?.push(stats._1st_dose_allocations);
       dataSets[1].data?.push(stats._2nd_dose_allocations);
     });
+
     this.weeklyVaccineAllocationData$.next({ datasets: dataSets, labels: labels });
   }
 }
