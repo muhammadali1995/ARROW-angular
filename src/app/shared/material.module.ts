@@ -1,13 +1,15 @@
-import {NgModule} from "@angular/core";
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from "@angular/material/icon";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatListModule} from "@angular/material/list";
-import {MatSelectModule} from "@angular/material/select";
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatOptionModule} from "@angular/material/core";
+import { NgModule } from "@angular/core";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from "@angular/material/icon";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatListModule } from "@angular/material/list";
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatOptionModule } from "@angular/material/core";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   imports: [
@@ -30,10 +32,9 @@ import {MatOptionModule} from "@angular/material/core";
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatOptionModule
-  ],
-  providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}
+    MatOptionModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule {

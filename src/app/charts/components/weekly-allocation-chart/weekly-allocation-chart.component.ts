@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChartOptions, ChartType } from "chart.js";
+import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 import { Label } from "ng2-charts";
-import { BarChartData } from "src/app/models/charts-data";
+import { ChartsDataService } from "src/app/services/charts-data.service";
 
 
 
@@ -10,10 +10,11 @@ import { BarChartData } from "src/app/models/charts-data";
   templateUrl: './weekly-allocation-chart.component.html',
   styleUrls: ['./weekly-allocation-chart.component.scss']
 })
-export class WeeklyAllocationChartComponent implements OnInit {
+export class WeeklyAllocationChartComponent {
 
-  @Input() data: BarChartData;
+  datasets: ChartDataSets[];
   barchartLabels: Label[] = [];
+
   public chartOptions: ChartOptions = {
     responsive: true,
     scales: { xAxes: [{}], yAxes: [{}] },
@@ -28,11 +29,6 @@ export class WeeklyAllocationChartComponent implements OnInit {
   public barChartLabels: Label[];
   public barChartType: ChartType = 'bar';
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-    this.barChartLabels = this.data.labels;
-  }
+  constructor(public chartService: ChartsDataService) { }
 
 }

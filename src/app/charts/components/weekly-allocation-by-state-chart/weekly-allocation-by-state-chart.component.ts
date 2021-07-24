@@ -1,7 +1,8 @@
-import { PieChartData } from '../../../models/charts-data';
-import { BarChartData } from 'src/app/models/charts-data';
-import { Component, Input, OnInit } from '@angular/core';
+import { Label, SingleDataSet } from 'ng2-charts';
+import { PieChartData } from './../../../models/charts-data';
+import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from "chart.js";
+import { ChartsDataService } from "src/app/services/charts-data.service";
 
 @Component({
   selector: 'app-weekly-allocation-by-start-chart',
@@ -9,8 +10,9 @@ import { ChartOptions, ChartType } from "chart.js";
   styleUrls: ['./weekly-allocation-by-start-chart.component.scss']
 })
 export class WeeklyAllocationByStateChartComponent {
-  @Input() data: PieChartData;
- 
+  labels: Label[];
+  datasets: SingleDataSet;
+
   public pieChartOptions: ChartOptions = {
     responsive: true,
     legend: {
@@ -21,4 +23,6 @@ export class WeeklyAllocationByStateChartComponent {
   };
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
+
+  constructor(public chartService: ChartsDataService) { }
 }

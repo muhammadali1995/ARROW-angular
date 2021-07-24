@@ -1,4 +1,4 @@
-<div style="display: block;" *ngIf='data.datasets && data.labels'>
+<div class="bar-chart-wrapper" *ngIf="chartService.weeklyVaccineAllocationData$ | async as data">
   <canvas baseChart [datasets]="data.datasets" [labels]="data.labels" [options]="chartOptions"
     [chartType]="barChartType">
   </canvas>

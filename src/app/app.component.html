@@ -2,7 +2,7 @@
   <mat-drawer class="side-nav" #drawer mode='side'>
     <p>Arrow</p>
     <mat-nav-list>
-      <a routerLink="" routerLinkActive='active"' mat-list-item>
+      <a routerLink="/" routerLinkActive='active' [routerLinkActiveOptions]="{ exact: true }" mat-list-item>
         Charts
       </a>
       <a routerLink="/tables" routerLinkActive="active" mat-list-item>

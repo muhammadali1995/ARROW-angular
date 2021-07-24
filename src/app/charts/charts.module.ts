@@ -1,3 +1,4 @@
+import { ChartsDataService } from 'src/app/services/charts-data.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartsRoutingModule } from "./charts-routing.module";
@@ -11,8 +12,8 @@ import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
-    ChartsComponent, 
-    WeeklyAllocationChartComponent, 
+    ChartsComponent,
+    WeeklyAllocationChartComponent,
     WeeklyAllocationByStateChartComponent
   ],
   imports: [
@@ -21,6 +22,9 @@ import { ChartsModule } from 'ng2-charts';
     CommonModule,
     ChartsModule,
     ChartsRoutingModule
+  ],
+  providers: [
+    ChartsDataService
   ]
 })
 export class ChartModule {
