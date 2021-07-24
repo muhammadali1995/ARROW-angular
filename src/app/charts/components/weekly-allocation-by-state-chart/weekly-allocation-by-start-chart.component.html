@@ -1,9 +1,5 @@
-<div style="display: block;" *ngIf='data'>
-    <canvas baseChart
-            [data]="data.datasets"
-            [labels]="data.labels"
-            [chartType]="pieChartType"
-            [options]="pieChartOptions"
-            [legend]="pieChartLegend">
+<div *ngIf="chartService.weeklyVaccineAllocationByStateData$ | async as data">
+  <canvas baseChart [data]="data.datasets" [labels]="data.labels" [chartType]="pieChartType" [options]="pieChartOptions"
+    [legend]="pieChartLegend">
   </canvas>
 </div>
