@@ -1,0 +1,5 @@
+<div style="display: block;" *ngIf='data.datasets && data.labels'>
+  <canvas baseChart [datasets]="data.datasets" [labels]="data.labels" [options]="chartOptions"
+    [chartType]="barChartType">
+  </canvas>
+</div>

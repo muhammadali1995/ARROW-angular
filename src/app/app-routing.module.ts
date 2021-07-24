@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () => import('./charts/charts.module').then(m => m.ChartsModule)
+    loadChildren: () => import('./charts/charts.module').then(m => m.ChartModule)
   },
   {
     path: 'tables',

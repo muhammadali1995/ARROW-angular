@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {STATES} from "../../models/states";
-import {ChartsDataService} from "../../services/charts-data.service";
-import {StateStats} from "../../models/state-stats";
+import { WEEKS_OF_ALLOCATION, PieChartData } from './../../models/charts-data';
+import { Label } from 'ng2-charts';
+import { Component, OnInit } from '@angular/core';
+import { BarChartData } from "src/app/models/charts-data";
+import { ChartsDataService } from "../../services/charts-data.service";
+
 
 @Component({
   selector: 'app-charts',
@@ -11,20 +13,37 @@ import {StateStats} from "../../models/state-stats";
 export class ChartsComponent implements OnInit {
 
   selectedState: string = '';
-  states: string [] = STATES;
-  weeklyVaccineAllocationByStates: StateStats[];
+  selectedDate: string = '2021-06-21T00:00:00.000'
+  weeklyVaccineAllocation: BarChartData;
+  weeklyVaccineAllocationByState: PieChartData;
+  weeksOfAllocation = WEEKS_OF_ALLOCATION;
+  states: Label[];
 
   constructor(private chartsDataService: ChartsDataService) {
   }
 
   ngOnInit(): void {
-    this.chartsDataService.fetchAllStateWeeklyDoseAllocation('2021-06-21T00:00:00.000').subscribe((stats: StateStats[]) => {
-      this.weeklyVaccineAllocationByStates = stats;
+    this.chartsDataService.fetchAllStateWeeklyDoseAllocation(this.selectedDate);
+
+    this.chartsDataService.weeklyVaccineAllocationData$.subscribe((data: BarChartData) => {
+      this.weeklyVaccineAllocation = data;
+    });
+
+    this.chartsDataService.states$.subscribe(states => this.states = states);
+
+    this.chartsDataService.weeklyVaccineAllocationByStateData$.subscribe((data: PieChartData) => {
+      console.log(data);
+      this.weeklyVaccineAllocationByState = data;
     })
   }
 
-  onStateChange() {
-    console.log('change', this.selectedState);
+  onStateChange(): void {
+    this.chartsDataService.fetchWeeklyDoseAllocationByState(this.selectedDate, this.selectedState);
   }
 
+
+  onDateChange(): void {
+    this.chartsDataService.fetchAllStateWeeklyDoseAllocation(this.selectedDate);
+    this.chartsDataService.fetchWeeklyDoseAllocationByState(this.selectedDate, this.selectedState);
+  }
 }
