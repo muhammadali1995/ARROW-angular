@@ -1,4 +1,6 @@
 .charts-container {
+  padding: 10px 20px;
+
   .title {
     padding: 2px 20px;
   }
@@ -14,8 +16,9 @@
     display: flex;
 
     .chart-wrapper {
-      flex: auto;
+      flex: 1;
     }
+
     .bar-chart-wrapper {
       flex: 2;
       overflow-y: scroll;
