@@ -1,5 +1,5 @@
-import { WeeklyAllocationByStateChartComponent } from './../weekly-allocation-by-state-chart/weekly-allocation-by-state-chart.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { WeeklyAllocationByStateChartComponent } from "./weekly-allocation-by-state-chart.component";
 
 
 describe('WeeklyAllocationByStartChartComponent', () => {

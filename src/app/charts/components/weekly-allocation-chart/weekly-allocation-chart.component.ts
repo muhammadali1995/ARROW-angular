@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from "chart.js";
 import { Label } from "ng2-charts";
 import { BarChartData } from "src/app/models/charts-data";

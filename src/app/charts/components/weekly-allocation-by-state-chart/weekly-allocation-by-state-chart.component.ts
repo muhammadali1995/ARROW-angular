@@ -1,4 +1,4 @@
-import { PieChartData } from './../../../models/charts-data';
+import { PieChartData } from '../../../models/charts-data';
 import { BarChartData } from 'src/app/models/charts-data';
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from "chart.js";
