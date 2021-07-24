@@ -44,6 +44,10 @@ export class ChartsComponent implements OnInit {
 
   onDateChange(): void {
     this.chartsDataService.fetchAllStateWeeklyDoseAllocation(this.selectedDate);
-    this.chartsDataService.fetchWeeklyDoseAllocationByState(this.selectedDate, this.selectedState);
+    
+    //if there is a state then updates the data of pie chart as well
+    if (this.selectedState) {
+      this.chartsDataService.fetchWeeklyDoseAllocationByState(this.selectedDate, this.selectedState);
+    }
   }
 }

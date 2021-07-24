@@ -39,7 +39,6 @@ export class ChartsDataService {
   }
 
   setWeeklyVaccineAllocationByStateData(stateStats: StateStats[]) {
-    console.log(stateStats);
     const data = stateStats[0];
     const labels: Label[] = ['Dose 1', 'Dose 2'];
     const dataSets: SingleDataSet = [data._1st_dose_allocations, data._2nd_dose_allocations];
@@ -56,7 +55,6 @@ export class ChartsDataService {
       data: [],
       label: '2nd dose allocations'
     }];
-
     stateStats.forEach((stats: StateStats) => {
       labels.push(stats.jurisdiction);
       dataSets[0].data?.push(stats._1st_dose_allocations);
