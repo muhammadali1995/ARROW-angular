@@ -1,3 +1,5 @@
+import { MAGNITUDES, Earthquake } from './../../models/table-data';
+import { TableDataService } from './../../services/table-data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablesComponent implements OnInit {
 
-  constructor() { }
+  public selectedMagnitude: number;
+  public maginutudes = MAGNITUDES;
+  earthquakes: Earthquake[];
+
+  constructor(private tableDataService: TableDataService) { }
 
   ngOnInit(): void {
+    this.fetchEathQuakes();
+  }
+
+  onMaginitudeChange() {
+    this.fetchEathQuakes();
+  }
+
+  fetchEathQuakes() {
+    this.tableDataService
+      .fetchAll(this.selectedMagnitude);
   }
 
 }
