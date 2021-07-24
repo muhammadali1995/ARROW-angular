@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
 import { Label } from "ng2-charts";
-import { BarChartData } from "src/app/models/charts-data";
 import { ChartsDataService } from "src/app/services/charts-data.service";
 
 
