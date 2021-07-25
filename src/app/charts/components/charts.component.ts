@@ -1,9 +1,9 @@
-import { takeUntil } from 'rxjs/operators';
-import { WEEKS_OF_ALLOCATION, STATES } from './../../models/charts-data';
-import { Label } from 'ng2-charts';
-import { Component, OnInit } from '@angular/core';
-import { ChartsDataService } from "../../services/charts-data.service";
-import { Subject } from "rxjs";
+import {takeUntil} from 'rxjs/operators';
+import {STATES, WEEKS_OF_ALLOCATION} from './../../models/charts-data';
+import {Label} from 'ng2-charts';
+import {Component, OnInit} from '@angular/core';
+import {ChartsDataService} from "../../services/charts-data.service";
+import {Subject} from "rxjs";
 
 
 @Component({
@@ -13,7 +13,7 @@ import { Subject } from "rxjs";
 })
 export class ChartsComponent implements OnInit {
 
-  unsubscibe$ = new Subject<void>();
+  unsubscribe$ = new Subject<void>();
 
   selectedState: string = '';
   selectedDate: string = '2021-06-21T00:00:00.000'
@@ -27,8 +27,6 @@ export class ChartsComponent implements OnInit {
   }
 
   onStateChange(): void {
-    console.log(this.selectedState);
-
     this.fetchWeeklyDoseAllocationByState();
   }
 
@@ -43,23 +41,25 @@ export class ChartsComponent implements OnInit {
 
   fetchAllStateWeeklyDoseAllocation(): void {
     this.chartsDataService
-      .fetchAllStateWeeklyDoseAllocation(this.selectedDate)
-      .pipe(takeUntil(this.unsubscibe$))
+        .fetchAllStateWeeklyDoseAllocation(this.selectedDate)
+        .pipe(takeUntil(this.unsubscribe$))
       .subscribe();
   }
 
   fetchWeeklyDoseAllocationByState(): void {
-    this.chartsDataService.
-      fetchWeeklyDoseAllocationByState(this.selectedDate, this.selectedState)
-      .pipe(takeUntil(this.unsubscibe$))
-      .subscribe();
+    this.chartsDataService
+        .fetchWeeklyDoseAllocationByState(this.selectedDate, this.selectedState)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe();
   }
 
 
-  //unsubscibe from subscriptions
+  // unsubscribe from subscriptions
   ngOnDestroy(): void {
-    this.unsubscibe$.next();
-    this.unsubscibe$.complete();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
+
+
 
 }

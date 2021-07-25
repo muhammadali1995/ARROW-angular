@@ -65,11 +65,13 @@ describe('TableDataService', () => {
       service.fetchAll()
           .pipe(take(1))
           .subscribe((earthquakes) => service.earthquakes$.next(earthquakes));
+
       const url = utilityService.getAugmentedUrl(environment.api.tables);
       const request = httpMock.expectOne(url);
+
       request.flush(data);
       expect(request.request.method).toEqual('GET');
-      expect(service.earthquakes$.getValue()).toEqual(data)
+      expect(service.earthquakes$.getValue()).toEqual(data);
     });
   });
 

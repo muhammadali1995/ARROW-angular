@@ -1,7 +1,7 @@
 import {WeeklyAllocationChartComponent} from './weekly-allocation-chart/weekly-allocation-chart.component';
 import {FormsModule} from '@angular/forms';
-import {MaterialModule} from './../../shared/material.module';
-import {ChartsDataService} from './../../services/charts-data.service';
+import {MaterialModule} from '../../shared/material.module';
+import {ChartsDataService} from '../../services/charts-data.service';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ChartsComponent} from './charts.component';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
@@ -47,13 +47,13 @@ describe('ChartsComponent', () => {
 
   describe('ngOnDestroy()', () => {
     it('should unsubscribe on destroy', () => {
-      spyOn(component.unsubscibe$, 'next').and.callThrough();
-      spyOn(component.unsubscibe$, 'complete').and.callThrough();
+      spyOn(component.unsubscribe$, 'next').and.callThrough();
+      spyOn(component.unsubscribe$, 'complete').and.callThrough();
 
       component.ngOnDestroy();
 
-      expect(component.unsubscibe$.next).toHaveBeenCalledOnceWith();
-      expect(component.unsubscibe$.complete).toHaveBeenCalledOnceWith();
+      expect(component.unsubscribe$.next).toHaveBeenCalledOnceWith();
+      expect(component.unsubscribe$.complete).toHaveBeenCalledOnceWith();
     });
   }); // describe - ngOnDestroy()
 

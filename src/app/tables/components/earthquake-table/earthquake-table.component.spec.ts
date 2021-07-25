@@ -1,9 +1,9 @@
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './../../../shared/material.module';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TableDataService } from "src/app/services/table-data.service";
-import { EarthquakeTableComponent } from './earthquake-table.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialModule} from '../../../shared/material.module';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {TableDataService} from "src/app/services/table-data.service";
+import {EarthquakeTableComponent} from './earthquake-table.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('EarthquakeTableComponent', () => {
   let component: EarthquakeTableComponent;
@@ -12,10 +12,9 @@ describe('EarthquakeTableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        MaterialModule, 
+        MaterialModule,
         HttpClientTestingModule,
-        BrowserAnimationsModule,
-        NoopAnimationsModule
+        BrowserAnimationsModule
       ],
       declarations: [EarthquakeTableComponent],
       providers: [TableDataService]
