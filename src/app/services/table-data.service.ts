@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { BehaviorSubject } from "rxjs";
+import { Observable } from "rxjs";
 
 const apiUrl = environment.api.tables;
 
@@ -16,10 +17,9 @@ export class TableDataService {
     private httpClient: HttpClient,
     private utilityService: UtilityService) { }
 
-  fetchAll(magnitude?: number) {
+  fetchAll(magnitude?: number): Observable<Earthquake[]> {
     const url = this.utilityService.getAugmentedUrl(apiUrl, { magnitude: magnitude });
-    this.httpClient.get<Earthquake[]>(url)
-      .pipe(tap((earthquakes: Earthquake[]) => this.earthquakes$.next(earthquakes)))
-      .subscribe();
+     return this.httpClient.get<Earthquake[]>(url)
+      .pipe(tap((earthquakes: Earthquake[]) => this.earthquakes$.next(earthquakes)));
   }
 }

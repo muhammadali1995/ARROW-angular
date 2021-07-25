@@ -2,10 +2,10 @@
     <h1 class="title">Earthquake stats</h1>
     <div class="filter-wrapper">
         <mat-form-field appearance='fill'>
-            <mat-label>Select a maginutude</mat-label>
-            <mat-select matNativeControl (selectionChange)="onMaginitudeChange()" [(ngModel)]="selectedMagnitude">
-                <mat-option [value]=''>Select a maginutude</mat-option>
-                <mat-option *ngFor="let maginitude of maginutudes" [value]="maginitude">{{maginitude}}</mat-option>
+            <mat-label>Select a magnitude</mat-label>
+            <mat-select matNativeControl (selectionChange)="onMagnitudeChange()" [(ngModel)]="selectedMagnitude">
+                <mat-option [value]=''>Select a magnitude</mat-option>
+                <mat-option *ngFor="let magnitude of magnitudes" [value]="magnitude">{{magnitude}}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>

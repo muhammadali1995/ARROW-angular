@@ -22,8 +22,10 @@ export class ChartsDataService {
     private utilityService: UtilityService) { }
 
   fetchAllStateWeeklyDoseAllocation(week_of_allocations: string): Observable<StateStats[]> {
-    const url: string = this.utilityService.getAugmentedUrl(apiUrl, { week_of_allocations: week_of_allocations });
-    return this.httpClient.get<StateStats[]>(url).pipe(tap((data) => {
+    const url: string = this.utilityService
+      .getAugmentedUrl(apiUrl, { week_of_allocations: week_of_allocations });
+
+    return this.httpClient.get<StateStats[]>(url).pipe(tap((data: StateStats[]) => {
       this.setWeeklyVaccineAllocationData(data);
     }));
   }
@@ -45,7 +47,6 @@ export class ChartsDataService {
   //map data for charts
   setWeeklyVaccineAllocationData(stateStats: StateStats[]): void {
     if (stateStats.length === 0) return;
-
     const labels: Label[] = [];
     const dataSets: ChartDataSets[] = [{
       data: [],

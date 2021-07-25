@@ -1,19 +1,19 @@
-import { Subject } from 'rxjs';
-import { TableDataService } from './../../../services/table-data.service';
-import { Earthquake } from './../../../models/table-data';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from "@angular/material/paginator";
-import { takeUntil } from "rxjs/operators";
+import {Subject} from 'rxjs';
+import {TableDataService} from '../../../services/table-data.service';
+import {Earthquake} from '../../../models/table-data';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from "@angular/material/paginator";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-earthquake-table',
   templateUrl: './earthquake-table.component.html',
   styleUrls: ['./earthquake-table.component.scss']
 })
-export class EarthquakeTableComponent implements OnInit {
+export class EarthquakeTableComponent implements OnInit, AfterViewInit {
 
-  private unsubscibes$ = new Subject<void>();
+  private unsubscribes$ = new Subject<void>();
 
   dataSource: MatTableDataSource<Earthquake> = new MatTableDataSource<Earthquake>();
   displayedColumns: string[] = [
@@ -31,7 +31,7 @@ export class EarthquakeTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.tableDataService.earthquakes$
-      .pipe(takeUntil(this.unsubscibes$))
+      .pipe(takeUntil(this.unsubscribes$))
       .subscribe((eq: Earthquake[]) => {
         this.dataSource.data = eq;
       });
@@ -41,10 +41,10 @@ export class EarthquakeTableComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  //unsubscibe fro subscriptions
+  // unsubscribe fro subscriptions
   ngOnDestroy(): void {
-    this.unsubscibes$.next();
-    this.unsubscibes$.complete();
+    this.unsubscribes$.next();
+    this.unsubscribes$.complete();
   }
 }
 
