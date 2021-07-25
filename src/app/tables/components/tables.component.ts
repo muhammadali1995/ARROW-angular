@@ -25,7 +25,7 @@ export class TablesComponent implements OnInit {
 
   fetchEarthQuakes() {
     this.tableDataService
-      .fetchAll(this.selectedMagnitude);
+      .fetchAll(this.selectedMagnitude).subscribe();
   }
 
 }

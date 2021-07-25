@@ -5,6 +5,7 @@ export interface Earthquake {
    depth: number;
    number_of_stations: number;
    region: string;
+   version: number;
 }
 
 export const MAGNITUDES = [

@@ -5,8 +5,9 @@ import {TableDataService} from './table-data.service';
 import {UtilityService} from "./utility.service";
 import {take} from "rxjs/operators";
 import {environment} from "../../environments/environment";
+import {earthquakeDataFactory} from "../../test-stubs/table";
 
-fdescribe('TableDataService', () => {
+describe('TableDataService', () => {
   let service: TableDataService;
   let utilityService: UtilityService;
   let httpMock: HttpTestingController;
@@ -45,14 +46,30 @@ fdescribe('TableDataService', () => {
     });
 
     it('should request for all earthquakes with magnitude 4', () => {
+      let earthquakes = earthquakeDataFactory.buildList(10);
       service
           .fetchAll(params.magnitude)
           .pipe(take(1))
-          .subscribe();
+          .subscribe(earthquakes => {
+            expect(earthquakes[0].magnitude).toEqual(4)
+          });
 
       const url = utilityService.getAugmentedUrl(environment.api.tables, params);
       const request = httpMock.expectOne(url);
       expect(request.request.method).toEqual('GET');
+      request.flush(earthquakes);
+    });
+
+    it('should call earthquakes$ next when earthquake data is fetched', () => {
+      const data = earthquakeDataFactory.buildList(2);
+      service.fetchAll()
+          .pipe(take(1))
+          .subscribe((earthquakes) => service.earthquakes$.next(earthquakes));
+      const url = utilityService.getAugmentedUrl(environment.api.tables);
+      const request = httpMock.expectOne(url);
+      request.flush(data);
+      expect(request.request.method).toEqual('GET');
+      expect(service.earthquakes$.getValue()).toEqual(data)
     });
   });
 
