@@ -15,8 +15,7 @@ export class TablesComponent implements OnInit {
   public magnitudes = MAGNITUDES;
   unsubscribe$ = new Subject<void>();
 
-  constructor(private tableDataService: TableDataService) {
-  }
+  constructor(private tableDataService: TableDataService) {}
 
   ngOnInit(): void {
     this.fetchEarthQuakes();

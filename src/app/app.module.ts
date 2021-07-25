@@ -5,12 +5,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from "./shared/material.module";
-import {HttpClientModule} from "@angular/common/http";
-import { ChartsModule } from "ng2-charts";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {ChartsModule} from "ng2-charts";
+import {ErrorDialogComponent} from './error-dialog/error-dialog.component';
+import {HttpErrorInterceptor} from "./services/interceptors/http-error.interceptor";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +24,13 @@ import { ChartsModule } from "ng2-charts";
     ChartsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
