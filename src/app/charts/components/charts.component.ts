@@ -13,7 +13,7 @@ import { Subject } from "rxjs";
 })
 export class ChartsComponent implements OnInit {
 
-  private unsubscibes$ = new Subject<void>();
+  unsubscibe$ = new Subject<void>();
 
   selectedState: string = '';
   selectedDate: string = '2021-06-21T00:00:00.000'
@@ -27,12 +27,14 @@ export class ChartsComponent implements OnInit {
   }
 
   onStateChange(): void {
+    console.log(this.selectedState);
+
     this.fetchWeeklyDoseAllocationByState();
   }
 
   onDateChange(): void {
     this.fetchAllStateWeeklyDoseAllocation();
-   
+    
     //if there is a state then updates the data of pie chart as well
     if (this.selectedState) {
       this.fetchWeeklyDoseAllocationByState();
@@ -42,22 +44,22 @@ export class ChartsComponent implements OnInit {
   fetchAllStateWeeklyDoseAllocation(): void {
     this.chartsDataService
       .fetchAllStateWeeklyDoseAllocation(this.selectedDate)
-      .pipe(takeUntil(this.unsubscibes$))
+      .pipe(takeUntil(this.unsubscibe$))
       .subscribe();
   }
 
   fetchWeeklyDoseAllocationByState(): void {
     this.chartsDataService.
       fetchWeeklyDoseAllocationByState(this.selectedDate, this.selectedState)
-      .pipe(takeUntil(this.unsubscibes$))
+      .pipe(takeUntil(this.unsubscibe$))
       .subscribe();
   }
 
 
   //unsubscibe from subscriptions
   ngOnDestroy(): void {
-    this.unsubscibes$.next();
-    this.unsubscibes$.complete();
+    this.unsubscibe$.next();
+    this.unsubscibe$.complete();
   }
 
 }

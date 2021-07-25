@@ -3,13 +3,13 @@
   <div class="states-dropdown-wrapper">
     <mat-form-field appearance='fill'>
       <mat-label>Select a date</mat-label>
-      <mat-select (selectionChange)="onDateChange()" [(ngModel)]="selectedDate">
+      <mat-select id="date-select" (selectionChange)="onDateChange()" [(ngModel)]="selectedDate">
         <mat-option *ngFor="let date of weeksOfAllocation" [value]="date">{{date | date: 'short'}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Select a state</mat-label>
-      <mat-select (selectionChange)="onStateChange()" [(ngModel)]="selectedState">
+      <mat-select id='state-select' (selectionChange)="onStateChange()" [(ngModel)]="selectedState">
         <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
       </mat-select>
     </mat-form-field>

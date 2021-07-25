@@ -10,20 +10,20 @@ import { Component, OnInit } from '@angular/core';
 export class TablesComponent implements OnInit {
 
   public selectedMagnitude: number;
-  public maginutudes = MAGNITUDES;
+  public magnitudes = MAGNITUDES;
   earthquakes: Earthquake[];
 
   constructor(private tableDataService: TableDataService) { }
 
   ngOnInit(): void {
-    this.fetchEathQuakes();
+    this.fetchEarthQuakes();
   }
 
-  onMaginitudeChange() {
-    this.fetchEathQuakes();
+  onMagnitudeChange() {
+    this.fetchEarthQuakes();
   }
 
-  fetchEathQuakes() {
+  fetchEarthQuakes() {
     this.tableDataService
       .fetchAll(this.selectedMagnitude);
   }
